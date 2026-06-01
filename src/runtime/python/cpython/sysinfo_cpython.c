@@ -55,6 +55,9 @@ void sysinfo_fetch_static(sysinfo_runtime_static_t *dst) {
         const char *full = PyUnicode_AsUTF8(ver);
         static char ver_buf[64];
         strncpy(ver_buf, full, sizeof(ver_buf) - 1);
+        ver_buf[sizeof(ver_buf) - 1] = '\0';
+        char *space = strchr(ver_buf, ' ');
+        if (space) *space = '\0';
         char *nl = strchr(ver_buf, '\n');
         if (nl) *nl = '\0';
         dst->version = ver_buf;
